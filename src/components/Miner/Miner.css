@@ -1,0 +1,14 @@
+.main{
+    padding: 0;
+    margin-left: -40px;
+    margin-top: 85px;
+}
+
+.header{
+    text-decoration: underline;
+    color: indianred;
+}
+
+.list{
+    margin-top: 90px;
+}
