@@ -6,7 +6,7 @@ const provider = 'https://mainnet.infura.io/v3/3956a14355e64e05960416672e54b71f'
 const web3Provider = new web3.providers.HttpProvider(provider)
 const Web3 = new web3(web3Provider)
 
-let data = []
+let data = new Array(9)
 let resp
 
 class Home extends Component {
@@ -21,27 +21,25 @@ class Home extends Component {
       if (
         resp.miner &&
         resp.tranx &&
-        resp.blockNumber !== this.state.currentVal &&
-        this.state.myArr.length <= 9
+        resp.blockNumber !== this.state.currentVal
       ) {
-        console.log('response', resp)
         if (!data.length) {
           data.push(resp)
           this.setState({
             myArr: data,
             currentVal: resp.blockNumber
           })
-          console.log('data', data)
         } else {
-          data.push(resp)
+          data.unshift(resp)
+          if (data.length === 10) {
+            data.pop()
+          }
           this.setState({
             myArr: data,
             currentVal: resp.blockNumber
           })
-          console.log('unshift', data)
         }
       }
-      console.log('arr length', data.length)
     } catch (err) {
       console.log('err', err)
     }
@@ -70,7 +68,6 @@ class Home extends Component {
               <li>Total Difficulty</li>
             </ul>
           </div>
-          {/* {renderTable} */}
           <div>
             {data.map((item, i) => {
               return (

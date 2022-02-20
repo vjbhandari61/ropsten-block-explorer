@@ -12,8 +12,6 @@ class Miner extends Component {
       address: address,
       balance: minerBalance
     })
-
-    console.log('address', address)
   }
   render () {
     return (

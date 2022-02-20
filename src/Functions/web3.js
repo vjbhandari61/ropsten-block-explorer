@@ -6,18 +6,19 @@ const blockChain = new web3(web3Provider)
 export async function allDetails (blockNumber) {
   let blockDetails = await blockChain.eth.getBlock(blockNumber)
   let miner, tranx, difficulty
-  if (blockDetails.miner) {
+  if (!blockDetails.miner) {
+    console.log('Error: Cannot Function With Undefined')
+  } else {
     miner = blockDetails.miner
     tranx = blockDetails.transactions.length
     difficulty = blockDetails.totalDifficulty
   }
-
   return { blockNumber, miner, tranx, difficulty }
 }
 
 export async function allTransactions (blockNum) {
   const transactions = await blockChain.eth.getBlock(blockNum)
-  console.log('transactions', transactions.transactions)
+
   return transactions.transactions
 }
 
